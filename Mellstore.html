@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MellStore</title>
+<style>
+:root{--bg:#f5f3ff;--card:#fff;--tx:#1b1535;--mu:#6b6590;--ac:#7c3aed;--bd:#e4defa;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f0b1f;--card:#1a1433;--tx:#f0ecff;--mu:#9d95c7;--ac:#a78bfa;--bd:#2d2552}}
+:root[data-theme="dark"]{--bg:#0f0b1f;--card:#1a1433;--tx:#f0ecff;--mu:#9d95c7;--ac:#a78bfa;--bd:#2d2552}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.4 system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh}
+.w{max-width:900px;margin:auto;padding:14px}
+header{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.logo{font-size:24px;font-weight:800;background:linear-gradient(90deg,#7c3aed,#ec4899,#f59e0b);-webkit-background-clip:text;background-clip:text;color:transparent}
+nav{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0}
+button,select,input,textarea{font:inherit;color:var(--tx)}
+.b{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:7px 12px;cursor:pointer}
+.b.on,.b.p{background:var(--ac);color:#fff;border-color:var(--ac)}
+.b.d{color:#e11d48}
+input,select,textarea{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:8px 10px;width:100%}
+.g{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}@media(min-width:620px){.g{grid-template-columns:repeat(3,minmax(0,1fr))}}.g.d1{grid-template-columns:minmax(0,1fr)!important}.c.t{display:flex;flex-direction:column;text-align:center;align-items:center}.c.t p{margin:4px 0;word-break:break-word}.c.t .row{justify-content:center;margin-top:auto;padding-top:8px}.sw{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 0;border-bottom:1px solid var(--bd)}.mod{position:fixed;inset:0;background:var(--bg);display:flex;flex-direction:column;z-index:20;padding-top:env(safe-area-inset-top,0px)}.mod iframe{flex:1;border:0;background:#fff}.na .nk{animation:none!important}.logo{display:inline-block;user-select:none;-webkit-tap-highlight-color:transparent}.logo.pop{animation:lp .7s cubic-bezier(.3,1.6,.5,1)}@keyframes lp{0%{transform:scale(1)}25%{transform:scale(1.35) rotate(-8deg)}50%{transform:scale(.9) rotate(6deg)}75%{transform:scale(1.15) rotate(-3deg)}100%{transform:scale(1)}}.fx{position:fixed;z-index:30;pointer-events:none;font-size:22px;animation:fx 1s ease-out forwards}@keyframes fx{0%{transform:translate(-50%,-50%) scale(.3);opacity:1}100%{transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(1.3) rotate(var(--r));opacity:0}}.rg{position:fixed;z-index:29;pointer-events:none;width:20px;height:20px;border-radius:50%;border:3px solid #ec4899;transform:translate(-50%,-50%);animation:rg .8s ease-out forwards}@keyframes rg{to{width:220px;height:220px;opacity:0;border-color:#7c3aed}}
+.c{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:12px}
+.ap{display:flex;flex-direction:column;align-items:center;gap:6px;min-width:0}
+.ic{font-size:36px;width:68px;height:68px;border-radius:16px;display:grid;place-items:center;background:var(--bg);flex:none}
+.mu{color:var(--mu);font-size:13px}
+.nk{font-weight:700;-webkit-background-clip:text;background-clip:text;color:transparent;background-size:200% 100%}
+.nk.an{animation:sh 3s linear infinite}
+@keyframes sh{to{background-position:200% 0}}
+.tag{font-size:10px;padding:1px 6px;border-radius:99px;background:#f59e0b;color:#fff;margin-left:4px;vertical-align:middle}
+.bar{height:6px;border-radius:9px;background:var(--bg);overflow:hidden;margin:6px 0}.bar i{display:block;height:100%;background:linear-gradient(90deg,#22c55e,#eab308)}
+.row{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:8px}
+.row>*{width:auto}
+h3{margin:14px 0 8px}
+.av{width:22px;height:22px;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:4px}
+footer{text-align:center;margin:30px 0 10px;font-size:14px}
+.pk{display:flex;flex-wrap:wrap;gap:6px}.pk span{cursor:pointer;padding:4px 8px;border:2px solid var(--bd);border-radius:10px}.pk span.s{border-color:var(--ac)}
+</style></head><body><div class="w" id="app"></div>
+<script>
+const G=["linear-gradient(90deg,#ff0080,#ff8c00)","linear-gradient(90deg,#00c6ff,#0072ff)","linear-gradient(90deg,#11998e,#38ef7d)","linear-gradient(90deg,#8e2de2,#4a00e0)","linear-gradient(90deg,#f12711,#f5af19)","linear-gradient(90deg,#ee9ca7,#a18cd1)","linear-gradient(90deg,#fc00ff,#00dbde)","linear-gradient(90deg,#f7971e,#ffd200)","linear-gradient(90deg,#43e97b,#38f9d7)","linear-gradient(90deg,#fa709a,#fee140)","linear-gradient(90deg,#30cfd0,#7b2ff7)","linear-gradient(90deg,#ff0000,#ff7f00,#ffff00,#00ff00,#0000ff,#8b00ff)"];
+const GN=["Закат","Океан","Мята","Космос","Огонь","Сакура","Неон","Мёд","Лайм","Персик","Лёд","Радуга"];
+const I=["🌟","👑","🔥","💎","🚀","🍞","🦄","⚡","🌈","🐉","🎮","🛡️","🍀","🧠","🌸","👾"];
+const CATS=["Игры","Соцсети","Утилиты","Музыка","Фото","Учёба"];
+const LV=["🥚 Яйцо","🐣 Птенец","🐥 Подросток","🦅 Взрослый","🐉 Легенда"];
+const SUPER=["хлеб","denis"];
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const seed=()=>[["Мелл Раннер","🏃","Бесконечный бегун по мармеладным мирам","Игры"],["Мелл Чат","💬","Быстрые чаты с друзьями","Соцсети"],["Заметки+","📝","Простые заметки с тегами","Утилиты"],["Мелл Плеер","🎧","Музыка без рекламы","Музыка"],["Пиксель","📷","Фильтры и коллажи","Фото"],["Зубрилка","🎓","Карточки для запоминания","Учёба"]].map((a,i)=>({id:i+1,name:a[0],ic:a[1],d:a[2],c:a[3],by:"mellstore",st:"ok",b:i%3,inst:i*2+1,rate:4+(i%2)*.5}));
+let S;try{S=JSON.parse(localStorage.getItem("mell1"))}catch(e){}
+if(!S||!S.users)S={users:[],apps:[],me:null,nid:20};S.apps=S.apps.filter(a=>a.by!=="mellstore");S.set=S.set||{theme:"auto",anim:1,dense:0};S.sound=S.sound||"click";
+const save=()=>{try{localStorage.setItem("mell1",JSON.stringify(S))}catch(e){}};
+let V="store",q="",cat="",aerr="",AT="apps",inst={},T=null;
+const ico=a=>a.img?`<img src="${a.img}" style="width:100%;height:100%;object-fit:cover;border-radius:14px">`:esc(a.ic);
+const ic2=a=>a.img?`<img class="av" src="${a.img}">`:esc(a.ic);
+function rd(f,cb){if(!f)return;const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const m=Math.min(im.width,im.height),c=document.createElement("canvas");c.width=c.height=128;c.getContext("2d").drawImage(im,(im.width-m)/2,(im.height-m)/2,m,m,0,0,128,128);cb(c.toDataURL("image/jpeg",.82))};im.src=r.result};r.readAsDataURL(f)}
+let FF=null;
+const idb=()=>new Promise((ok,no)=>{try{const r=indexedDB.open("mell",1);r.onupgradeneeded=()=>r.result.createObjectStore("f");r.onsuccess=()=>ok(r.result);r.onerror=()=>no()}catch(e){no()}});
+const fput=(id,f)=>idb().then(d=>d.transaction("f","readwrite").objectStore("f").put(f,id)).catch(()=>{});
+const fget=id=>idb().then(d=>new Promise(ok=>{const r=d.transaction("f").objectStore("f").get(id);r.onsuccess=()=>ok(r.result);r.onerror=()=>ok(null)})).catch(()=>null);
+const fdel=id=>idb().then(d=>d.transaction("f","readwrite").objectStore("f").delete(id)).catch(()=>{});
+const pf=el=>{FF=el.files[0]||null};
+const st=(k,v)=>{S.set[k]=v;save();R()};
+function delacc(){if(!confirm("Удалить аккаунт и все твои приложения?"))return;const n=S.me;S.apps.filter(a=>a.by.toLowerCase()===n).forEach(a=>fdel(a.id));S.apps=S.apps.filter(a=>a.by.toLowerCase()!==n);S.users=S.users.filter(u=>u.n.toLowerCase()!==n);S.me=null;V="store";save();R()}
+async function openf(id){const a=S.apps.find(x=>x.id===id),f=await fget(id);if(!f)return alert("Файл не найден в памяти этого браузера");
+ if(/\.html?$/i.test(a.fn)){const t=await f.text();document.body.insertAdjacentHTML("beforeend",'<div class="mod" id="md"><button class="b" onclick="md.remove()">✕ Закрыть</button><iframe sandbox="allow-scripts"></iframe></div>');document.querySelector("#md iframe").srcdoc=t;return}
+ try{const d=await claude.use("downloads");if(!d)throw 0;await d.save({filename:a.fn,data:f})}catch(e){if(!e||e.code!=="declined")alert("Этот формат (например .apk) нельзя сохранить из браузерной версии")}}
+function sets(){const u=me(),s=S.set;
+ return `<div class="c"><h3 style="margin-top:0">⚙️ Настройки</h3>
+ <div class="sw"><span>Сервер</span><input style="width:58%" placeholder="http://адрес:3000" value="${esc(API)}" onchange="try{localStorage.setItem('mell_srv',this.value.trim())}catch(e){}location.reload()"></div>
+ <div class="sw"><span>Тема</span><select style="width:auto" onchange="st('theme',this.value)">${[["auto","Авто"],["light","Светлая"],["dark","Тёмная"]].map(x=>`<option value="${x[0]}" ${s.theme===x[0]?"selected":""}>${x[1]}</option>`).join("")}</select></div>
+ <div class="sw"><span>Переливание ников</span><input type="checkbox" style="width:auto" ${s.anim?"checked":""} onchange="st('anim',this.checked?1:0)"></div>
+ <div class="sw"><span>Одна колонка в сетке</span><input type="checkbox" style="width:auto" ${s.dense?"checked":""} onchange="st('dense',this.checked?1:0)"></div>
+ <div class="sw"><span>Мяуканье котёнка 🐱</span><input type="checkbox" style="width:auto" ${s.snd!==0?"checked":""} onchange="st('snd',this.checked?1:0)"></div>
+ 
+ ${u?'<div class="row"><button class="b d" onclick="delacc()">Удалить аккаунт</button></div>':""}</div>`}
+let AC;function meow(){if(S.set.snd===0)return;try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();[0,.9].forEach((dt,k)=>{const t=AC.currentTime+dt,o=AC.createOscillator(),o2=AC.createOscillator(),l=AC.createOscillator(),lg=AC.createGain(),f=AC.createBiquadFilter(),h=AC.createBiquadFilter(),g=AC.createGain();o.type="sawtooth";o2.type="triangle";[o,o2].forEach((x,i)=>{const m=i?2:1;x.frequency.setValueAtTime(700*m*(1+k*.15),t);x.frequency.exponentialRampToValueAtTime(1250*m*(1+k*.15),t+.12);x.frequency.setValueAtTime(1250*m*(1+k*.15),t+.2);x.frequency.exponentialRampToValueAtTime(600*m*(1+k*.15),t+.75)});l.frequency.value=22;lg.gain.value=25;l.connect(lg);lg.connect(o.frequency);f.type="bandpass";f.Q.value=6;f.frequency.setValueAtTime(1100,t);f.frequency.exponentialRampToValueAtTime(2800,t+.15);f.frequency.exponentialRampToValueAtTime(1300,t+.75);h.type="highpass";h.frequency.value=500;g.gain.setValueAtTime(.001,t);g.gain.exponentialRampToValueAtTime(.45,t+.06);g.gain.setValueAtTime(.45,t+.2);g.gain.exponentialRampToValueAtTime(.001,t+.8);o.connect(f);o2.connect(f);f.connect(h);h.connect(g);g.connect(AC.destination);[o,o2,l].forEach(x=>{x.start(t);x.stop(t+.85)})})}catch(e){}}
+function logoFx(el){meow();el.classList.remove("pop");void el.offsetWidth;el.classList.add("pop");const r=el.getBoundingClientRect(),x=r.left+r.width/2,y=r.top+r.height/2,E=["🐱","🐾","💜","✨","🍬","😸","⭐"],rg=document.createElement("div");rg.className="rg";rg.style.left=x+"px";rg.style.top=y+"px";document.body.appendChild(rg);setTimeout(()=>rg.remove(),900);
+ for(let i=0;i<12;i++){const s=document.createElement("span"),a=Math.PI*2*i/12+Math.random()*.5,d=70+Math.random()*80;s.className="fx";s.textContent=E[i%E.length];s.style.cssText=`left:${x}px;top:${y}px;--dx:${Math.cos(a)*d}px;--dy:${Math.sin(a)*d-30}px;--r:${(Math.random()-.5)*120}deg;animation-delay:${i*15}ms`;document.body.appendChild(s);setTimeout(()=>s.remove(),1200)}}
+function pimg(el){rd(el.files[0],d=>{T=d;const p=document.getElementById("pv");p.src=d;p.style.display="block"})}
+function ava(el){rd(el.files[0],d=>{me().av=d;save();R()})}
+const me=()=>S.users.find(u=>u.n.toLowerCase()===S.me);
+const usr=n=>S.users.find(u=>u.n===n)||{n,g:3,i:0};
+const isSup=u=>u&&u.role==="super",isAdm=u=>u&&(u.role==="super"||u.role==="mod");
+const nk=u=>`${u.av?`<img class="av" src="${u.av}">`:""}<span>${I[u.i]||""}</span> <span class="nk ${u.an?"an":""}" style="background-image:${G[u.g]||G[0]}">${esc(u.n)}</span>${isSup(u)?'<span class="tag">SUPER</span>':u.role==="mod"?'<span class="tag" style="background:#3b82f6">MOD</span>':""}`;
+const lvl=a=>Math.min(4,a.b+Math.floor(a.inst/3));
+function reg(login){const n=document.getElementById("n").value.trim(),p=document.getElementById("p").value;
+ if(!/^[\wа-яё]{2,16}$/i.test(n)){aerr="Ник: 2–16 символов, буквы, цифры, _";return R()}
+ if(p.length<4){aerr="Пароль минимум 4 символа";return R()}
+ const h=btoa(unescape(encodeURIComponent(p))),u=S.users.find(x=>x.n.toLowerCase()===n.toLowerCase());
+ if(login){if(!u||u.p!==h){aerr="Неверный ник или пароль";return R()}if(u.ban){aerr="Аккаунт заблокирован";return R()}}
+ else{if(u){aerr="Ник занят";return R()}
+  const sp=SUPER.includes(n.toLowerCase());
+  S.users.push({n,p:h,role:sp?"super":"user",g:sp?11:S.users.length%11,i:sp?(n.toLowerCase()==="хлеб"?5:1):0,an:sp,ban:0})}
+ S.me=n.toLowerCase();aerr="";V="store";save();R()}
+const out0=()=>{S.me=null;V="store";save();R()};
+function instl(id){const u=me();if(!u)return V="auth",R();const a=S.apps.find(x=>x.id===id);const k=u.n+id;
+ if(!u.in)u.in=[];const i=u.in.indexOf(id);if(i<0){u.in.push(id);a.inst++}else{u.in.splice(i,1);a.inst--}save();R()}
+function sub(){const g=x=>document.getElementById(x).value.trim();if(!g("an")||!g("ad"))return alert("Заполни название и описание");if(!FF)return alert("Выбери файл приложения из памяти телефона");
+ const u=me();fput(S.nid,FF);S.apps.push({fn:FF.name,fs:FF.size,id:S.nid++,name:g("an"),ic:g("ai")||"📦",img:T,d:g("ad"),c:g("ac"),by:u.n,st:isAdm(u)?"ok":"pend",b:0,inst:0,rate:4});T=null;FF=null;save();V="store";R()}
+const A={ok:id=>{S.apps.find(a=>a.id===id).st="ok";save();R()},no:id=>{S.apps=S.apps.filter(a=>a.id!==id);fdel(id);save();R()}};
+function uset(n,k,v){const u=usr(n);u[k]=isNaN(v)||k==="role"?v:+v;save();R()}
+function pick(k,v){const u=me();u[k]=v;save();R()}
+function card(a){const u=me(),on=u&&u.in&&u.in.includes(a.id),l=lvl(a);
+ return `<div class="c t"><div class="ap"><div class="ic">${ico(a)}</div><b>${esc(a.name)}</b><div class="mu">${esc(a.c)}</div><div class="mu">${nk(usr(a.by))}</div></div>
+ <p class="mu">${esc(a.d)}</p><div class="mu">${a.inst} уст. · ${esc(a.fn||"")}</div>
+ <div class="row"><button class="b ${on?"":"p"}" onclick="instl(${a.id})">${on?"Удалить":"Установить"}</button>${on&&a.fn?`<button class="b" onclick="openf(${a.id})">${/\.html?$/i.test(a.fn)?"Открыть":"Сохранить"}</button>`:""}</div></div>`}
+function store(){const l=S.apps.filter(a=>a.st==="ok"&&(!cat||a.c===cat)&&a.name.toLowerCase().includes(q.toLowerCase()));
+ return `<input placeholder="🔍 Поиск приложений" value="${esc(q)}" oninput="q=this.value;R(1)">
+ <div class="row"><button class="b ${cat?"":"on"}" onclick="cat='';R()">Все</button>${CATS.map(c=>`<button class="b ${cat===c?"on":""}" onclick="cat='${c}';R()">${c}</button>`).join("")}</div>
+ <h3>Приложения</h3><div class="g ${S.set.dense?"d1":""}">${l.map(card).join("")||'<p class="mu">Пока здесь пусто. Зарегистрируйся и добавь первое приложение!</p>'}</div>`}
+function auth(){return `<div class="c" style="max-width:360px;margin:20px auto"><h3 style="margin-top:0">Вход / регистрация</h3>
+ <input id="n" placeholder="Ник" autocomplete="username"><div style="height:8px"></div><input id="p" type="password" placeholder="Пароль" autocomplete="current-password">
+ <p class="mu" style="color:#e11d48">${aerr}</p><div class="row"><button class="b p" onclick="reg(1)">Войти</button><button class="b" onclick="reg(0)">Создать аккаунт</button></div></div>`}
+function prof(){const u=me();return `<div class="c"><h3 style="margin-top:0">${nk(u)}</h3><p class="mu">Роль: ${u.role}. Установлено: ${(u.in||[]).length}</p>
+ <b>Фото профиля (из галереи)</b><div class="row"><input type="file" accept="image/*" onchange="ava(this)"></div><br><b>Градиент ника</b><div class="pk" style="margin:8px 0">${G.map((g,i)=>`<span class="${u.g===i?"s":""}" onclick="pick('g',${i})"><span class="nk" style="background-image:${g}">${GN[i]}</span></span>`).join("")}</div>
+ <b>Иконка рядом с ником</b><div class="pk" style="margin:8px 0">${I.map((x,i)=>`<span class="${u.i===i?"s":""}" onclick="pick('i',${i})">${x}</span>`).join("")}</div>
+ <label><input type="checkbox" style="width:auto" ${u.an?"checked":""} onchange="pick('an',this.checked)"> Переливающийся ник</label>
+ <div class="row"><button class="b d" onclick="out()">Выйти</button></div></div>`}
+function subm(){return `<div class="c"><h3 style="margin-top:0">Добавить приложение</h3><input id="an" placeholder="Название"><div style="height:8px"></div><b>Иконка из галереи</b><input id="af" type="file" accept="image/*" onchange="pimg(this)"><img id="pv" class="ic" style="display:none;margin:6px 0;width:64px;height:64px;object-fit:cover"><input id="ai" placeholder="или эмодзи, например 🎲" maxlength="4"><div style="height:8px"></div>
+ <textarea id="ad" rows="3" placeholder="Описание"></textarea><div style="height:8px"></div><b>Файл приложения (из памяти телефона)</b><input id="ff" type="file" onchange="pf(this)"><div style="height:8px"></div><select id="ac">${CATS.map(c=>`<option>${c}</option>`).join("")}</select>
+ <div class="row"><button class="b p" onclick="sub()">Отправить</button></div><p class="mu">Новые приложения попадают на проверку админам.</p></div>`}
+function adm(){const u=me();if(!isAdm(u))return"";const pend=S.apps.filter(a=>a.st==="pend");
+ let h=`<div class="row"><button class="b ${AT==="apps"?"on":""}" onclick="AT='apps';R()">Приложения ${pend.length?"("+pend.length+")":""}</button>${isSup(u)?`<button class="b ${AT==="us"?"on":""}" onclick="AT='us';R()">Пользователи</button>`:""}</div>`;
+ if(AT==="apps")h+=`<h3>На проверке</h3>`+(pend.map(a=>`<div class="c" style="margin-bottom:8px">${ic2(a)} <b>${esc(a.name)}</b> от ${nk(usr(a.by))}<div class="mu">${esc(a.d)}</div><div class="row"><button class="b p" onclick="A.ok(${a.id})">Одобрить</button><button class="b d" onclick="A.no(${a.id})">Отклонить</button></div></div>`).join("")||'<p class="mu">Пусто</p>')+
+ `<h3>Все приложения</h3><div class="g">`+S.apps.filter(a=>a.st==="ok").map(a=>`<div class="c">${ic2(a)} <b>${esc(a.name)}</b><div class="row"><button class="b d" onclick="A.no(${a.id})">Удалить</button></div></div>`).join("")+`</div>`;
+ else h+=`<h3>Пользователи</h3>`+S.users.map(x=>{const lock=isSup(x)&&x.n!==u.n&&false;return `<div class="c" style="margin-bottom:8px">${nk(x)} ${x.ban?"🚫":""}<div class="row">
+ <select onchange="uset('${x.n}','role',this.value)">${["user","mod","super"].map(r=>`<option ${x.role===r?"selected":""}>${r}</option>`).join("")}</select>
+ <select onchange="uset('${x.n}','g',this.value)">${GN.map((g,i)=>`<option value="${i}" ${x.g===i?"selected":""}>${g}</option>`).join("")}</select>
+ <select onchange="uset('${x.n}','i',this.value)">${I.map((g,i)=>`<option value="${i}" ${x.i===i?"selected":""}>${g}</option>`).join("")}</select>
+ ${SUPER.includes(x.n.toLowerCase())?"":`<button class="b d" onclick="uset('${x.n}','ban',${x.ban?0:1})">${x.ban?"Разбан":"Бан"}</button>`}</div></div>`}).join("")||'<p class="mu">Нет пользователей</p>';
+ return h}
+function R(keep){const u=me(),f=document.activeElement&&document.activeElement.id;const th=S.set.theme;th==="auto"?document.documentElement.removeAttribute("data-theme"):document.documentElement.setAttribute("data-theme",th);document.body.classList.toggle("na",!S.set.anim);
+ const t=[["store","🛍️ Магазин"]];if(u){if(S.open||isAdm(u))t.push(["sub","➕ Добавить"]);t.push(["prof","👤 Профиль"]);if(isAdm(u))t.push(["adm","🛠️ Админ"])}t.push(["set","⚙️ Настройки"]);
+ const body=V==="set"?sets():V==="auth"&&!u?auth():V==="sub"&&u?subm():V==="prof"&&u?prof():V==="adm"&&isAdm(u)?adm():store();
+ const x=document.getElementById("app");
+ x.innerHTML=`<header><span class="logo" style="cursor:pointer" onclick="logoFx(this)">🍬 MellStore</span><div>${u?nk(u):'<button class="b p" onclick="V=\'auth\';R()">Войти</button>'}</div></header>
+ <nav>${t.map(a=>`<button class="b ${V===a[0]?"on":""}" onclick="V='${a[0]}';R()">${a[1]}</button>`).join("")}</nav>${body}
+ <footer class="mu">by <span class="nk an" style="background-image:${G[11]}">хлеб</span> и <span class="nk an" style="background-image:${G[3]}">Denis</span></footer>`;
+ if(keep){const el=x.querySelector("input[oninput]");if(el){el.focus();el.setSelectionRange(q.length,q.length)}}}
+R();
+</script><script>
+S.users=[];S.apps=[];if(!S.tok)S.me=null;
+const API=(()=>{try{return(localStorage.getItem("mell_srv")||"").replace(/\/$/,"")}catch(e){return""}})();
+async function api(p,b,m){const r=await fetch(API+p,{method:m||(b?"POST":"GET"),headers:{"Content-Type":"application/json",...(S.tok?{Authorization:"Bearer "+S.tok}:{})},body:b?JSON.stringify(b):undefined}),j=await r.json().catch(()=>({}));if(!r.ok)throw new Error(j.error||"Ошибка "+r.status);return j}
+async function refresh(){try{const j=await api("/api/state");S.users=j.users;S.apps=j.apps;S.open=j.open;if(S.me&&!me()){S.me=null;S.tok=null}}catch(e){aerr="Нет связи с сервером"}save();R()}
+const op=(o,d)=>api("/api/admin",{op:o,...d}).then(refresh).catch(e=>alert(e.message));
+A.ok=id=>op("ok",{id});A.no=id=>op("del",{id});
+function uset(n,k,v){op(k==="ban"?"ban":k==="role"?"role":"look",{n,k,v})}
+function pick(k,v){api("/api/me",{[k]:v}).then(refresh).catch(e=>alert(e.message))}
+function ava(el){rd(el.files[0],d=>pick("av",d))}
+async function reg(login){const n=document.getElementById("n").value.trim(),p=document.getElementById("p").value;
+ if(!/^[\wа-яё]{2,16}$/i.test(n)){aerr="Ник: 2–16 символов, буквы, цифры, _";return R()}
+ if(p.length<4){aerr="Пароль минимум 4 символа";return R()}
+ let key="";if(!login&&["хлеб","denis"].includes(n.toLowerCase()))key=prompt("Ключ админа (если сервер его требует)")||"";
+ try{const j=await api(login?"/api/login":"/api/register",{n,p,key});S.tok=j.tok;S.me=n.toLowerCase();aerr="";V="store";await refresh()}catch(e){aerr=e.message;R()}}
+function out(){S.me=null;S.tok=null;V="store";refresh()}
+async function instl(id){if(!me()){V="auth";return R()}try{await api("/api/install",{id});refresh()}catch(e){alert(e.message)}}
+async function sub(){const g=x=>document.getElementById(x).value.trim();if(!g("an")||!g("ad"))return alert("Заполни название и описание");if(!FF)return alert("Выбери файл приложения из памяти телефона");
+ try{const j=await api("/api/app",{name:g("an"),ic:g("ai")||"📦",img:T,d:g("ad"),c:g("ac"),fn:FF.name,fs:FF.size});const r=await fetch(API+"/api/file/"+j.id,{method:"PUT",headers:{Authorization:"Bearer "+S.tok},body:FF});if(!r.ok)throw new Error("Не удалось загрузить файл");T=null;FF=null;V="store";await refresh()}catch(e){alert(e.message)}}
+async function delacc(){if(!confirm("Удалить аккаунт и все твои приложения?"))return;try{await api("/api/delme",{});out()}catch(e){alert(e.message)}}
+async function openf(id){const a=S.apps.find(x=>x.id===id);if(/\.html?$/i.test(a.fn)){try{const t=await(await fetch(API+"/api/file/"+id,{headers:S.tok?{Authorization:"Bearer "+S.tok}:{}})).text();document.body.insertAdjacentHTML("beforeend",'<div class="mod" id="md"><button class="b" onclick="md.remove()">✕ Закрыть</button><iframe sandbox="allow-scripts"></iframe></div>');document.querySelector("#md iframe").srcdoc=t}catch(e){alert("Не удалось открыть")}return}
+ location.href=API+"/api/file/"+id+(S.tok?"?t="+S.tok:"")}
+refresh();
+</script>
+</body></html>
